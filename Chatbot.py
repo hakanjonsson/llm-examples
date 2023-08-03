@@ -11,7 +11,7 @@ if not openai_api_key:
 openai.api_key = openai_api_key
 
 st.title("💬 Tireless German tutor")
-st.text("I am a chatbot that will help you with your German.")
+st.text("I am a chatbot and will help you with your German language practice.")
 st.text("I will ask you questions and will correct your answers. Lets start!")
 if "messages" not in st.session_state:
  #   initial_prompt = "Please act as my German teacher. You ask me questions in German at level B2. You then wait for my response. Do not answer your own question. You then correct my answer, including providing a grammatical explanation of the correction. After correcting, you ask me a new question in German and await my answer."
