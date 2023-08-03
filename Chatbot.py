@@ -12,18 +12,19 @@ if not openai_api_key:
     st.stop()
 openai.api_key = openai_api_key
 
-st.title("💬 Chatbot")
+st.title("💬 Tireless German tutor")
+st.text("I am a chatbot that will help you with your German. I will ask you questions and will correct your answers. Lets start!")
 if "messages" not in st.session_state:
-    st.session_state["messages"] = [{"role": "assistant", "content": "How can I help you?"}]
-    prompt = "Please act as my German teacher. You ask me questions in German at level B2. You then wait for my response. Do not answer your own question. You then correct my answer, including providing a grammatical explanation of the correction. After correcting, you ask me a new question in German and await my answer."
-    st.session_state.messages.append({"role": "user", "content": prompt})
+ #   initial_prompt = "Please act as my German teacher. You ask me questions in German at level B2. You then wait for my response. Do not answer your own question. You then correct my answer, including providing a grammatical explanation of the correction. After correcting, you ask me a new question in German and await my answer."
+    st.session_state["messages"] = [{"role": "system", "content":"Please act as my German teacher. You ask me questions in German at level B2. You then wait for my response. Do not answer your own question. You then correct my answer, including providing a grammatical explanation of the correction. After correcting, you ask me a new question in German and await my answer."}]
+ #   st.session_state.messages.append({"role": "system", "content": initial_prompt})
     response = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=st.session_state.messages)
     msg = response.choices[0].message
     st.session_state.messages.append(msg)
-    st.chat_message("assistant").write(msg.content)
 
 for msg in st.session_state.messages:
-    st.chat_message(msg["role"]).write(msg["content"])
+    if msg["role"] != "system":
+        st.chat_message(msg["role"]).write(msg["content"])
 
 if prompt := st.chat_input():
     st.session_state.messages.append({"role": "user", "content": prompt})
