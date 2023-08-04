@@ -12,7 +12,7 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 #    st.stop()
 #openai.api_key = openai_api_key
 
-st.title("💬 Helmut, the Tireless German tutor")
+st.title("Tireless German tutor")
 st.text("I am a chatbot and will help you with your German language practice.")
 st.text("I will ask you questions and will correct your answers. Lets start!")
 if "messages" not in st.session_state:
